@@ -1,7 +1,7 @@
 
 public class CountPrime {
 	public static int countPrimes(int n) {
-		Boolean[] notPrime= new Boolean[n];
+		boolean[] notPrime= new boolean[n]; //boolean (default false), NOT Boolean (default null)
 		int count=0;
 		for(int i=2;i<n;i++) {
 			if(notPrime[i]==false) { 
