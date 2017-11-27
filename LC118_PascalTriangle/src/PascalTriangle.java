@@ -10,8 +10,8 @@ public class PascalTriangle {
 			for(int j=1;j<row.size()-1;j++) {  //j<row.size()-1, NOT row.size()
 				row.set(j, row.get(j)+row.get(j+1));
 			}
-			rows.add(row);
-			//rows.add(new ArrayList<Integer>(row));
+			//rows.add(row); //WRONG, row value will be updated in each loop. like ([1,1], [1,1])
+			rows.add(new ArrayList<Integer>(row));
 		}
 		return rows;
 	}
