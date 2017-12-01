@@ -12,7 +12,7 @@ public class LongestPalindromicSubstring {
 	    }
 	        
 	    public String extend(String s, int j, int k){
-	       for(;j>=0&&k<s.length();j--,k++){
+	       for(;j>=0&&k<s.length();j--,k++){  //from center to head and tail
 	           if(s.charAt(j)!=s.charAt(k)){
 	               break;
 	           }
