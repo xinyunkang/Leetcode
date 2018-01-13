@@ -27,6 +27,11 @@ public class FirstBadVersion {
 		}
 	}
 
+	private boolean isBadVersion(int mid) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
