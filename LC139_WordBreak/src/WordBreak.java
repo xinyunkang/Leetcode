@@ -2,27 +2,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WordBreak {
-	public static boolean wordBreak(String s, List<String> dict) {
-		//DP
-		boolean[] f = new boolean[s.length() + 1]; // use s.length()+1;
-		f[0] = true;  //set the initial to true;
-		for (int end = 1; end <= s.length(); end++) { //start from 1  <=s.length(), NOT <s.length()
-			for (int start = 0; start < end; start++) {  //start<end
-				if (f[start] && dict.contains(s.substring(start, end))) { //before dict f[start] is true; from start to end (NOT include) is contained in dict.
-					f[end] = true;  //if contain s.charAt(i), set f[i]=true;
-					break;
-				}
-			}
-		}
-		return f[s.length()]; //means from start=0 to end=s.length()-1 there are dicts matches.
-	}
+	 public boolean wordBreak(String s, List<String> wordDict) {
+	        //dp
+	        //for subString(a,b), b is the upper limit not included.
+	        //in order to get the subString with the last character, need s.length+1;
+	        boolean[] dp = new boolean[s.length()+1];
+	        dp[0]=true;
+	        
+	        for(int end=1;end<=s.length();end++){  //start from 1 because last index is s.length;
+	            for(int start=0; start<end; start++){ //the start index of word need to be checked.
+	                //dp[start]== true when former subStrings are contained in Dict.
+	                if(dp[start]&&wordDict.contains(s.substring(start,end))){   //substring, NOT subString           
+	                    dp[end]=true; 
+	                    break;
+	                } 
+	            }
+	        }
+	        
+	        return dp[s.length()];
+		
+	    }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ArrayList<String> str=new ArrayList<String>() ;
-		str.add("leet");
-		str.add("code");
-		wordBreak("leetcode",str);
+//		// TODO Auto-generated method stub
+//		ArrayList<String> str=new ArrayList<String>() ;
+//		str.add("leet");
+//		str.add("code");
+//		wordBreak("leetcode",str);
 	}
 
 }
