@@ -1,23 +1,27 @@
 
 public class LongestPalindromicSubstring {
-	public String longestPalindrome(String s) {
-	       String max="";
-	        for(int i=0;i<s.length();i++){
-	            String s1=extend(s,i,i); //if s.length is odd;
-	            String s2=extend(s,i,i+1); //if s.length is even;
-	            if(s1.length()>max.length()) max=s1;
-	            if(s2.length()>max.length()) max=s2;
+	 String res=""; //global variable
+	    public String longestPalindrome(String s) {
+	        if(s==null||s.length()==0) return "";        
+	        for(int i=0;i<s.length();i++){  
+	            helper(s, i, i);  //if s.length is odd.
+	            helper(s, i, i+1); //even
 	        }
-	        return max;
+	        return res;
 	    }
 	        
-	    public String extend(String s, int j, int k){
-	       for(;j>=0&&k<s.length();j--,k++){  //from center to head and tail
-	           if(s.charAt(j)!=s.charAt(k)){
-	               break;
-	           }
-	       }
-	        return s.substring(j+1, k);  //NOT subString
+	    public void helper(String s, int left, int right){
+	        while(left>=0&&right<s.length()&&s.charAt(left)==s.charAt(right)){//right<s.length, not <= 
+	            //NOT if(s.charAt(left)==s.charAt(right)), should be in while condition
+	            left--;
+	            right++;            
+	        }
+	        //the last left-- and right++ got a not meet request value. 
+	        //so rollback using the meet request substring.
+	        String temp=s.substring(left+1,right); 
+	        if(temp.length()>res.length()){
+	            res=temp;
+	        }
 	    }
 	    
 	    
