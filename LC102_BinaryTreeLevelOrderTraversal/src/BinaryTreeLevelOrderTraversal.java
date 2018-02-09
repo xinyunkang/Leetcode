@@ -1,5 +1,6 @@
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
+import java.util.Queue;
 
 public class BinaryTreeLevelOrderTraversal {
 
@@ -22,6 +23,25 @@ public class BinaryTreeLevelOrderTraversal {
 		helper(res, root.right, height + 1);
 
 	}
+	
+	public List<List<Integer>> levelOrder2(TreeNode root) {
+        List<List<Integer>> res= new ArrayList<>();
+        if(root==null) return res;
+        Queue<TreeNode> q= new LinkedList<>();
+        q.offer(root);
+        while(!q.isEmpty()){
+            int size = q.size(); //get the number of nodes in this level
+            List<Integer> list= new ArrayList<>();  //record the result in this level
+            for(int i=0;i<size;i++){
+                TreeNode n= q.poll();
+                list.add(n.val);
+                if(n.left!=null) q.offer(n.left);
+                if(n.right!=null) q.offer(n.right);
+            }
+            res.add(list);
+        }
+        return res;
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
