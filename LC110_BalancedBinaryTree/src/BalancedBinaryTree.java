@@ -1,5 +1,33 @@
 
 public class BalancedBinaryTree {
+	
+	
+	
+
+    public boolean isBalanced2(TreeNode root) {
+	    //PostOrder O(n)  O(n)
+		if(root==null) {
+			return true;
+		}
+     
+		return helper(root)!=-1;
+		
+	}
+   
+   public int helper(TreeNode root){
+       if(root==null) return 0;
+       int l=helper(root.left);
+       int r=helper(root.right);
+       if(l==-1||r==-1||Math.abs(l-r)>1){
+           return -1;
+       }
+       return Math.max(l,r)+1;        
+       
+   }
+   
+   //////////////////////
+	
+	
 	public boolean isBalanced(TreeNode root) {
 		// a height-balanced binary tree is defined as a binary tree in which the depth
 		// of the two subtrees of every node never differ by more than 1.
