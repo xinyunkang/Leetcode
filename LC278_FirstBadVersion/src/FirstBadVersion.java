@@ -1,37 +1,30 @@
 
 public class FirstBadVersion {
+	// edward version
+	// Time: O(log(n))
+	// Space: O(1)
 	public int firstBadVersion(int n) {
-		// Binary search
-		return binarySearch(1, n);
-	}
+		int start = 1;
+		int end = n;
 
-	public int binarySearch(int start, int end) {
-
-		long startLong = start;
-		long endLong = end;
-		Long middleLong = (startLong + endLong) / 2; // use long to avoid sum overflow
-		int mid = middleLong.intValue(); // need to cast back to int.
-
-		if (isBadVersion(mid)) { // isBadVersion() is an api provided by leetcode.
-			if (!isBadVersion(mid - 1)) { // consider the +1/-1 scenario
-				return mid;
+		while (start + 1 < end) { // no need to concern mid+1,-1
+			int mid = (end - start) / 2 + start; // no need to use long.
+			if (isBadVersion(mid)) {
+				end = mid;
 			} else {
-				return binarySearch(start, mid - 1); // return
+				start = mid;
 			}
-		} else {
-			if (isBadVersion(mid + 1)) { // consider the +1/-1 scenarios
-				return mid + 1;
-			} else {
-				return binarySearch(mid + 1, end); // return
-			}
+		} // after break end is always 1 larger than start
+		if (isBadVersion(start)) {
+			return start;
 		}
+		return end;
+
 	}
 
-	private boolean isBadVersion(int mid) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isBadVersion(int mid) {
+		return true;
 	}
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
